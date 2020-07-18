@@ -1,18 +1,13 @@
 <template>
   <div id="app">
     <AuthenticationForm />
-    <Clicker />
   </div>
 </template>
 
 <script>
-import Clicker from "./components/Clicker";
-
 export default {
   name: "App",
-  components: {
-    Clicker
-  }
+  components: {}
 };
 </script>
 

@@ -1,7 +1,11 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <div>{{ name }}</div>
+  <div class="feather-authentication-form">
+    <input v-model="email" placeholder="email" />
+    <input v-model="password" placeholder="password" type="password" />
+    <button :disabled="isBusy" @click="onSubmit">
+      <div class="spinner" v-if="isBusy">Loading</div>
+      Login!
+    </button>
   </div>
 </template>
 
@@ -10,14 +14,41 @@ export default {
   name: "AuthenticationForm",
   data() {
     return {
-      name: this.$feather.currentUser
+      email: "",
+      password: "",
+      isBusy: false
     };
+  },
+  methods: {
+    onSubmit() {
+      console.log("clicked on submit!");
+      this.isBusy = true;
+      this.$feather
+        .newCurrentCredential({
+          email: this.email,
+          password: this.password
+        })
+        .then(credential => {
+          if (credential.status !== "valid")
+            throw new Error("Email or password is incorrect.");
+          return this.$feather.newCurrentUser(credential.token);
+        })
+        .then(currentUser => {
+          this.isBusy = false;
+          console.log(currentUser);
+        })
+        .catch(e => {
+          // Handle errors
+          this.isBusy = false;
+          console.error(e);
+        });
+    }
   }
 };
 </script>
 
 <style>
-#app {
+.feather-authentication-form {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

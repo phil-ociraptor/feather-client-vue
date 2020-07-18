@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <AuthenticationForm />
-    <Clicker />
+    <img alt="Vue logo" src="../assets/logo.png" />
+    <div>{{ name }}</div>
   </div>
 </template>
 
 <script>
-import Clicker from "./components/Clicker";
-
 export default {
-  name: "App",
-  components: {
-    Clicker
+  name: "AuthenticationForm",
+  data() {
+    return {
+      name: this.$feather.currentUser
+    };
   }
 };
 </script>

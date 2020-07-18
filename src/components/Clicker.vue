@@ -1,17 +1,14 @@
 <template>
-  <div id="app">
-    <AuthenticationForm />
-    <Clicker />
-  </div>
+  <div @click="doTheThing">Click me!</div>
 </template>
 
 <script>
-import Clicker from "./components/Clicker";
-
 export default {
-  name: "App",
-  components: {
-    Clicker
+  name: "Clicker",
+  methods: {
+    doTheThing() {
+      this.$feather.currentUser = "Alice";
+    }
   }
 };
 </script>

@@ -1,18 +1,12 @@
 <template>
   <div id="app">
-    <AuthenticationForm />
-    <Clicker />
+    <img alt="Vue logo" src="../assets/logo.png" />
   </div>
 </template>
 
 <script>
-import Clicker from "./components/Clicker";
-
 export default {
-  name: "App",
-  components: {
-    Clicker
-  }
+  name: "AuthenticationForm"
 };
 </script>
 

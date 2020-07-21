@@ -1,6 +1,6 @@
 <template>
   <div class="feather-authentication-form">
-    Forgot Password
+    Reset password
     <form-input
       name="emailInput"
       placeholder=""

@@ -2,28 +2,28 @@
   <div class="feather-authentication-form">
     Sign in
     <form-input
+      :onChange="onChangeInput"
       name="emailInput"
-      placeholder=""
+      placeholder
       title="Email"
       type="email"
-      v-model="email"
+      :value="email"
     />
     <form-input
       :helpButton="helpButton"
+      :onChange="onChangeInput"
       name="passwordInput"
-      placeholder=""
+      placeholder
       title="Password"
       type="password"
-      v-model="password"
+      :value="password"
     />
     <div v-if="!!errorMessage">{{ errorMessage }}</div>
     <button :disabled="isBusy" @click="onSubmit">
       <div class="spinner" v-if="isBusy">Loading</div>
       Login!
     </button>
-    <span @click="e => setCurrentForm('sign_up')">
-      Go to sign up
-    </span>
+    <span @click="e => setCurrentForm('sign_up')">Go to sign up</span>
   </div>
 </template>
 
@@ -36,22 +36,31 @@ export default {
     FormInput
   },
   props: {
+    email: String,
     isBusy: Boolean,
+    password: String,
+    onChangeInput: Function,
     setCurrentForm: Function,
-    setIsBusy: Function
+    setEmail: Function,
+    setIsBusy: Function,
+    setPassword: Function
   },
   data() {
     return {
+      emailModel: "",
+      passwordModel: "",
       helpButton: {
         title: "Forgot Password?",
         onClick: () => this.setCurrentForm("forgot_password")
       },
-      email: "",
-      errorMessage: null,
-      password: ""
+      errorMessage: null
     };
   },
   methods: {
+    onChange(e) {
+      console.log("CHANGING!");
+      console.log(e.target);
+    },
     onSubmit() {
       console.log("clicked on submit!");
       this.setIsBusy(true);

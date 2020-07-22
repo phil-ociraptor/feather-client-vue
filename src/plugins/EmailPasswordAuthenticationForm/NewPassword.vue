@@ -2,11 +2,12 @@
   <div class="feather-authentication-form">
     New Password
     <form-input
+      :onChange="onChangePassword"
       name="passwordInput"
       placeholder=""
       title="New Password"
       type="password"
-      v-model="password"
+      :value="password"
     />
     <div v-if="!!errorMessage">{{ errorMessage }}</div>
     <button :disabled="isBusy" @click="onSubmit">
@@ -25,8 +26,10 @@ export default {
     FormInput
   },
   props: {
+    email: String,
     input: Object,
     isBusy: Boolean,
+    onChangeInput: Function,
     setCurrentForm: Function,
     setIsBusy: Function
   },
@@ -41,8 +44,10 @@ export default {
     };
   },
   methods: {
+    onChangePassword(event) {
+      this.password = event.target.value;
+    },
     onSubmit() {
-      console.log("clicked on submit!");
       this.setIsBusy(true);
       const password = this.password;
       this.$feather
@@ -51,10 +56,7 @@ export default {
           this.$feather.passwords.create(password, credential.token)
         )
         .then(() =>
-          this.$feather.newCurrentCredential({
-            email: this.input.email, //TODO how do to get this...
-            password
-          })
+          this.$feather.newCurrentCredential({ email: this.email, password })
         )
         .then(credential => this.$feather.newCurrentUser(credential.token))
         .catch(error => {

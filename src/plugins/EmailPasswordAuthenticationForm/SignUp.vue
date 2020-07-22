@@ -2,34 +2,35 @@
   <div class="feather-authentication-form">
     Sign up
     <form-input
+      :onChange="onChangeInput"
       name="emailInput"
-      placeholder=""
+      placeholder
       title="Email"
       type="email"
-      v-model="email"
+      :value="email"
     />
     <form-input
+      :onChange="onChangeInput"
       name="passwordInput"
-      placeholder=""
+      placeholder
       title="Password"
       type="password"
-      v-model="password"
+      :value="password"
     />
     <form-input
+      :onChange="onChangeInput"
       name="confirmPasswordInput"
-      placeholder=""
+      placeholder
       title="Confirm password"
       type="password"
-      v-model="confirmPassword"
+      :value="confirmPassword"
     />
     <div v-if="!!errorMessage">{{ errorMessage }}</div>
     <button :disabled="isBusy" @click="onSubmit">
       <div class="spinner" v-if="isBusy">Loading</div>
       Login!
     </button>
-    <span @click="e => setCurrentForm('sign_in')">
-      Go to sign in
-    </span>
+    <span @click="e => setCurrentForm('sign_in')">Go to sign in</span>
   </div>
 </template>
 
@@ -42,16 +43,17 @@ export default {
     FormInput
   },
   props: {
+    confirmPassword: String,
+    email: String,
     isBusy: Boolean,
+    onChangeInput: Function,
+    password: String,
     setCurrentForm: Function,
     setIsBusy: Function
   },
   data() {
     return {
-      email: "",
-      errorMessage: null,
-      password: "",
-      confirmPassword: ""
+      errorMessage: null
     };
   },
   methods: {

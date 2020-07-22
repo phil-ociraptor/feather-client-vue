@@ -1,30 +1,41 @@
 <template>
   <div class="wrapper">
     <sign-in
+      :email="email"
       :isBusy="isBusy"
+      :onChangeInput="onChangeInput"
+      :password="password"
       :setCurrentForm="setCurrentForm"
       :setIsBusy="setIsBusy"
       v-if="currentForm === 'sign_in'"
     />
     <sign-up
+      :email="email"
       :isBusy="isBusy"
+      :onChangeInput="onChangeInput"
+      :password="password"
+      :confirmPassword="confirmPassword"
       :setCurrentForm="setCurrentForm"
       :setIsBusy="setIsBusy"
       v-else-if="currentForm === 'sign_up'"
     />
     <forgot-password
+      :email="email"
       :isBusy="isBusy"
+      :onChangeInput="onChangeInput"
       :setCurrentForm="setCurrentForm"
       :setIsBusy="setIsBusy"
       v-else-if="currentForm === 'forgot_password'"
     />
     <verify-email
       :isBusy="isBusy"
+      :onChangeInput="onChangeInput"
       :setCurrentForm="setCurrentForm"
       :setIsBusy="setIsBusy"
       v-else-if="currentForm === 'verify_email'"
     />
     <new-password
+      :email="email"
       :isBusy="isBusy"
       :setCurrentForm="setCurrentForm"
       :setIsBusy="setIsBusy"
@@ -51,11 +62,31 @@ export default {
   },
   data() {
     return {
+      confirmPassword: "",
       currentForm: "sign_in",
-      isBusy: false
+      email: "",
+      isBusy: false,
+      password: ""
     };
   },
   methods: {
+    onChangeInput(event) {
+      const value = event.target.value;
+      event.preventDefault();
+      switch (event.target.name) {
+        case "emailInput":
+          this.email = value;
+          break;
+        case "passwordInput":
+          this.password = value;
+          break;
+        case "confirmPasswordInput":
+          this.confirmPassword = value;
+          break;
+        default:
+          break;
+      }
+    },
     setCurrentForm(currentForm) {
       this.currentForm = currentForm;
     },

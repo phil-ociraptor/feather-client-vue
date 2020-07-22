@@ -14,7 +14,7 @@
       :placeholder="placeholder"
       :type="type"
       :value="value"
-      @input="$emit('input', $event.target.value)"
+      @change="onChange"
     />
   </div>
 </template>
@@ -22,7 +22,15 @@
 <script>
 export default {
   name: "FormInput",
-  props: ["helpButton", "name", "placeholder", "title", "type", "value"],
+  props: [
+    "helpButton",
+    "name",
+    "onChange",
+    "placeholder",
+    "title",
+    "type",
+    "value"
+  ],
   methods: {
     onSubmit() {
       console.log("clicked on submit!");

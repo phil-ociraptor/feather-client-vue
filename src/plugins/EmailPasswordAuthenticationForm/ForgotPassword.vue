@@ -2,11 +2,12 @@
   <div class="feather-authentication-form">
     Reset password
     <form-input
+      :onChange="onChangeInput"
       name="emailInput"
       placeholder=""
       title="Email"
       type="email"
-      v-model="email"
+      :value="email"
     />
     <div v-if="!!errorMessage">{{ errorMessage }}</div>
     <button :disabled="isBusy" @click="onSubmit">
@@ -28,7 +29,9 @@ export default {
     FormInput
   },
   props: {
+    email: String,
     isBusy: Boolean,
+    onChangeInput: Function,
     setCurrentForm: Function,
     setIsBusy: Function
   },
@@ -38,9 +41,7 @@ export default {
         title: "Forgot Password?",
         onClick: () => this.setCurrentForm("forgot_password")
       },
-      email: "",
-      errorMessage: null,
-      password: ""
+      errorMessage: null
     };
   },
   methods: {

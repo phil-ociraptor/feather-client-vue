@@ -3,27 +3,27 @@
     Sign up
     <form-input
       :onChange="onChangeInput"
+      :value="email"
       name="emailInput"
       placeholder
       title="Email"
       type="email"
-      :value="email"
     />
     <form-input
       :onChange="onChangeInput"
+      :value="password"
       name="passwordInput"
       placeholder
       title="Password"
       type="password"
-      :value="password"
     />
     <form-input
       :onChange="onChangeInput"
+      :value="confirmPassword"
       name="confirmPasswordInput"
       placeholder
       title="Confirm password"
       type="password"
-      :value="confirmPassword"
     />
     <div v-if="!!errorMessage">{{ errorMessage }}</div>
     <button :disabled="isBusy" @click="onSubmit">
@@ -58,7 +58,6 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log("clicked on submit!");
       if (this.password !== this.confirmPassword) {
         this.errorMessage =
           "Your password and password confirmation do not match";
@@ -76,14 +75,12 @@ export default {
           return this.$feather.newCurrentUser(credential.token);
         })
         .then(currentUser => {
-          //this.isBusy = false;
           this.setIsBusy(false);
           this.errorMessage = null;
           console.log(currentUser);
         })
         .catch(e => {
           // Handle errors
-          //this.isBusy = false;
           this.setIsBusy(false);
           this.errorMessage = e.message;
           console.error(e);

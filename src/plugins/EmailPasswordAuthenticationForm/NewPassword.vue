@@ -3,11 +3,11 @@
     New Password
     <form-input
       :onChange="onChangePassword"
+      :value="password"
       name="passwordInput"
       placeholder=""
       title="New Password"
       type="password"
-      :value="password"
     />
     <div v-if="!!errorMessage">{{ errorMessage }}</div>
     <button :disabled="isBusy" @click="onSubmit">

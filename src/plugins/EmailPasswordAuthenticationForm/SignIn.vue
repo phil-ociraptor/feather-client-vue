@@ -3,20 +3,20 @@
     Sign in
     <form-input
       :onChange="onChangeInput"
+      :value="email"
       name="emailInput"
       placeholder
       title="Email"
       type="email"
-      :value="email"
     />
     <form-input
       :helpButton="helpButton"
       :onChange="onChangeInput"
+      :value="password"
       name="passwordInput"
       placeholder
       title="Password"
       type="password"
-      :value="password"
     />
     <div v-if="!!errorMessage">{{ errorMessage }}</div>
     <button :disabled="isBusy" @click="onSubmit">
@@ -41,14 +41,10 @@ export default {
     password: String,
     onChangeInput: Function,
     setCurrentForm: Function,
-    setEmail: Function,
-    setIsBusy: Function,
-    setPassword: Function
+    setIsBusy: Function
   },
   data() {
     return {
-      emailModel: "",
-      passwordModel: "",
       helpButton: {
         title: "Forgot Password?",
         onClick: () => this.setCurrentForm("forgot_password")
@@ -57,12 +53,7 @@ export default {
     };
   },
   methods: {
-    onChange(e) {
-      console.log("CHANGING!");
-      console.log(e.target);
-    },
     onSubmit() {
-      console.log("clicked on submit!");
       this.setIsBusy(true);
       this.$feather
         .newCurrentCredential({
@@ -75,14 +66,12 @@ export default {
           return this.$feather.newCurrentUser(credential.token);
         })
         .then(currentUser => {
-          //this.isBusy = false;
           this.setIsBusy(false);
           this.errorMessage = null;
           console.log(currentUser);
         })
         .catch(e => {
           // Handle errors
-          //this.isBusy = false;
           this.setIsBusy(false);
           this.errorMessage = e.message;
           console.error(e);

@@ -3,11 +3,11 @@
     Reset password
     <form-input
       :onChange="onChangeInput"
+      :value="email"
       name="emailInput"
       placeholder=""
       title="Email"
       type="email"
-      :value="email"
     />
     <div v-if="!!errorMessage">{{ errorMessage }}</div>
     <button :disabled="isBusy" @click="onSubmit">
@@ -46,7 +46,6 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log("clicked on submit!");
       this.setIsBusy(true);
       const email = this.email;
       const templateName = "reset_password";

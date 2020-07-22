@@ -36,8 +36,7 @@ export default {
         onClick: () => this.setCurrentForm("forgot_password")
       },
       verificationCode: "",
-      errorMessage: null,
-      password: ""
+      errorMessage: null
     };
   },
   methods: {

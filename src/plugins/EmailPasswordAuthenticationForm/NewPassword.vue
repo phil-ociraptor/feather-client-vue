@@ -1,8 +1,11 @@
 <template>
-  <div class="feather-authentication-form">
-    New Password
+  <div>
+    <p :class="titleClass">
+      New Password
+    </p>
     <form-input
       :onChange="onChangePassword"
+      :styles="styles"
       :value="password"
       name="passwordInput"
       placeholder=""
@@ -10,7 +13,7 @@
       type="password"
     />
     <div v-if="!!errorMessage">{{ errorMessage }}</div>
-    <button :disabled="isBusy" @click="onSubmit">
+    <button :disabled="isBusy" @click="onSubmit" :class="primaryCtaButtonClass">
       <div class="spinner" v-if="isBusy">Loading</div>
       Update Password
     </button>
@@ -19,6 +22,7 @@
 
 <script>
 import FormInput from "../FormInput/FormInput.vue";
+import { css } from "emotion";
 
 export default {
   name: "EmailPasswordAuthenticationFormNewPassword",
@@ -31,10 +35,23 @@ export default {
     isBusy: Boolean,
     onChangeInput: Function,
     setCurrentForm: Function,
-    setIsBusy: Function
+    setIsBusy: Function,
+    styles: Object
   },
   data() {
     return {
+      primaryCtaButtonClass: css`
+        ${this.styles.primaryCtaButton}
+      `,
+      secondaryCtaButtonClass: css`
+        ${this.styles.secondaryCtaButton}
+      `,
+      titleClass: css`
+        ${this.styles.title}
+      `,
+      subtitleClass: css`
+        ${this.styles.subtitle}
+      `,
       helpButton: {
         title: "Forgot Password?",
         onClick: () => this.setCurrentForm("forgot_password")

@@ -1,5 +1,5 @@
 <template>
-  <div class="feather-authentication-form">
+  <div>
     <email-password-authentication-form :styles="styles" />
   </div>
 </template>
@@ -25,13 +25,4 @@ export default {
 };
 </script>
 
-<style>
-.feather-authentication-form {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>

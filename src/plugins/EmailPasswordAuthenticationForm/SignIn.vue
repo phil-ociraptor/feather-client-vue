@@ -1,5 +1,5 @@
 <template>
-  <div class="feather-authentication-form">
+  <div>
     <!-- TODO parameterize the title text -->
     <p :class="titleClass">Sign in</p>
 

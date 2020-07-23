@@ -15,7 +15,9 @@
     <div v-if="!!errorMessage">{{ errorMessage }}</div>
     <button :disabled="isBusy" @click="onSubmit" :class="primaryCtaButtonClass">
       <div class="spinner" v-if="isBusy">Loading</div>
-      Update Password
+      <span v-if="!isBusy">
+        Update Password
+      </span>
     </button>
   </div>
 </template>

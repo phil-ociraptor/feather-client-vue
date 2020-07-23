@@ -2,7 +2,7 @@
   <div class="feather-authentication-form">
     Sign in
     <form-input
-      :class="myClass"
+      :class="subtitleClass"
       :onChange="onChangeInput"
       :value="email"
       name="emailInput"
@@ -31,11 +31,6 @@
 <script>
 import FormInput from "../FormInput/FormInput.vue";
 import { css } from "emotion";
-import { defaultStyles } from "../styles.js";
-
-const myClass = css`
-  ${defaultStyles.subtitle}
-`;
 
 export default {
   name: "EmailPasswordAuthenticationFormSignIn",
@@ -48,11 +43,14 @@ export default {
     password: String,
     onChangeInput: Function,
     setCurrentForm: Function,
-    setIsBusy: Function
+    setIsBusy: Function,
+    styles: Object
   },
   data() {
     return {
-      myClass,
+      subtitleClass: css`
+        ${this.styles.subtitle}
+      `,
       helpButton: {
         title: "Forgot Password?",
         onClick: () => this.setCurrentForm("forgot_password")

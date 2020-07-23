@@ -7,6 +7,7 @@
       :password="password"
       :setCurrentForm="setCurrentForm"
       :setIsBusy="setIsBusy"
+      :styles="styles"
       v-if="currentForm === 'sign_in'"
     />
     <sign-up
@@ -17,6 +18,7 @@
       :confirmPassword="confirmPassword"
       :setCurrentForm="setCurrentForm"
       :setIsBusy="setIsBusy"
+      :styles="styles"
       v-else-if="currentForm === 'sign_up'"
     />
     <forgot-password
@@ -25,6 +27,7 @@
       :onChangeInput="onChangeInput"
       :setCurrentForm="setCurrentForm"
       :setIsBusy="setIsBusy"
+      :styles="styles"
       v-else-if="currentForm === 'forgot_password'"
     />
     <verify-email
@@ -32,6 +35,7 @@
       :onChangeInput="onChangeInput"
       :setCurrentForm="setCurrentForm"
       :setIsBusy="setIsBusy"
+      :styles="styles"
       v-else-if="currentForm === 'verify_email'"
     />
     <new-password
@@ -39,6 +43,7 @@
       :isBusy="isBusy"
       :setCurrentForm="setCurrentForm"
       :setIsBusy="setIsBusy"
+      :styles="styles"
       v-else-if="currentForm === 'new_password'"
     />
   </div>
@@ -59,6 +64,9 @@ export default {
     SignIn,
     SignUp,
     VerifyEmail
+  },
+  props: {
+    styles: Object
   },
   data() {
     return {

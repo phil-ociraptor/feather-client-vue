@@ -24,8 +24,7 @@ export const defaultStyles = {
   },
   subtitle: {
     fontSize: "18px",
-    color: "pink",
-    // color: "hsl(214, 24%, 32%)",
+    color: "hsl(214, 24%, 32%)",
     margin: "16px 0px 32px 0px",
     textAlign: "left",
     lineHeight: "1.6"

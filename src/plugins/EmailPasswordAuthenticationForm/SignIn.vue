@@ -1,8 +1,11 @@
 <template>
   <div class="feather-authentication-form">
-    Sign in
+    <!-- TODO parameterize the title text -->
+    <p :class="titleClass">Sign in</p>
+
     <form-input
       :class="subtitleClass"
+      :styles="styles"
       :onChange="onChangeInput"
       :value="email"
       name="emailInput"
@@ -12,6 +15,7 @@
     />
     <form-input
       :helpButton="helpButton"
+      :styles="styles"
       :onChange="onChangeInput"
       :value="password"
       name="passwordInput"
@@ -20,11 +24,16 @@
       type="password"
     />
     <div v-if="!!errorMessage">{{ errorMessage }}</div>
-    <button :disabled="isBusy" @click="onSubmit">
+    <button :disabled="isBusy" @click="onSubmit" :class="primaryCtaButtonClass">
       <div class="spinner" v-if="isBusy">Loading</div>
       Login!
     </button>
-    <span @click="e => setCurrentForm('sign_up')">Go to sign up</span>
+    <button
+      :class="secondaryCtaButtonClass"
+      @click="e => setCurrentForm('sign_up')"
+    >
+      Go to sign up
+    </button>
   </div>
 </template>
 
@@ -46,8 +55,20 @@ export default {
     setIsBusy: Function,
     styles: Object
   },
+  filters: {
+    css
+  },
   data() {
     return {
+      primaryCtaButtonClass: css`
+        ${this.styles.primaryCtaButton}
+      `,
+      secondaryCtaButtonClass: css`
+        ${this.styles.secondaryCtaButton}
+      `,
+      titleClass: css`
+        ${this.styles.title}
+      `,
       subtitleClass: css`
         ${this.styles.subtitle}
       `,

@@ -1,7 +1,8 @@
 <template>
-  <div class="feather-authentication-form">
-    Sign up
+  <div>
+    <p :class="titleClass">Sign up</p>
     <form-input
+      :styles="styles"
       :onChange="onChangeInput"
       :value="email"
       name="emailInput"
@@ -10,6 +11,7 @@
       type="email"
     />
     <form-input
+      :styles="styles"
       :onChange="onChangeInput"
       :value="password"
       name="passwordInput"
@@ -18,6 +20,7 @@
       type="password"
     />
     <form-input
+      :styles="styles"
       :onChange="onChangeInput"
       :value="confirmPassword"
       name="confirmPasswordInput"
@@ -26,16 +29,22 @@
       type="password"
     />
     <div v-if="!!errorMessage">{{ errorMessage }}</div>
-    <button :disabled="isBusy" @click="onSubmit">
+    <button :disabled="isBusy" @click="onSubmit" :class="primaryCtaButtonClass">
       <div class="spinner" v-if="isBusy">Loading</div>
       Login!
     </button>
-    <span @click="e => setCurrentForm('sign_in')">Go to sign in</span>
+    <button
+      :class="secondaryCtaButtonClass"
+      @click="e => setCurrentForm('sign_in')"
+    >
+      Go to sign in
+    </button>
   </div>
 </template>
 
 <script>
 import FormInput from "../FormInput/FormInput.vue";
+import { css } from "emotion";
 
 export default {
   name: "EmailPasswordAuthenticationFormSignUp",
@@ -49,10 +58,23 @@ export default {
     onChangeInput: Function,
     password: String,
     setCurrentForm: Function,
-    setIsBusy: Function
+    setIsBusy: Function,
+    styles: Object
   },
   data() {
     return {
+      primaryCtaButtonClass: css`
+        ${this.styles.primaryCtaButton}
+      `,
+      secondaryCtaButtonClass: css`
+        ${this.styles.secondaryCtaButton}
+      `,
+      titleClass: css`
+        ${this.styles.title}
+      `,
+      subtitleClass: css`
+        ${this.styles.subtitle}
+      `,
       errorMessage: null
     };
   },

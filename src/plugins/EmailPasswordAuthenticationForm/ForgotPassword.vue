@@ -1,7 +1,8 @@
 <template>
-  <div class="feather-authentication-form">
-    Reset password
+  <div>
+    <p :class="titleClass">Reset password</p>
     <form-input
+      :styles="styles"
       :onChange="onChangeInput"
       :value="email"
       name="emailInput"
@@ -10,18 +11,22 @@
       type="email"
     />
     <div v-if="!!errorMessage">{{ errorMessage }}</div>
-    <button :disabled="isBusy" @click="onSubmit">
+    <button :disabled="isBusy" @click="onSubmit" :class="primaryCtaButtonClass">
       <div class="spinner" v-if="isBusy">Loading</div>
       Continue
     </button>
-    <span @click="e => setCurrentForm('sign_in')">
+    <button
+      :class="secondaryCtaButtonClass"
+      @click="e => setCurrentForm('sign_in')"
+    >
       Cancel
-    </span>
+    </button>
   </div>
 </template>
 
 <script>
 import FormInput from "../FormInput/FormInput.vue";
+import { css } from "emotion";
 
 export default {
   name: "EmailPasswordAuthenticationFormForgotPassword",
@@ -33,10 +38,23 @@ export default {
     isBusy: Boolean,
     onChangeInput: Function,
     setCurrentForm: Function,
-    setIsBusy: Function
+    setIsBusy: Function,
+    styles: Object
   },
   data() {
     return {
+      primaryCtaButtonClass: css`
+        ${this.styles.primaryCtaButton}
+      `,
+      secondaryCtaButtonClass: css`
+        ${this.styles.secondaryCtaButton}
+      `,
+      titleClass: css`
+        ${this.styles.title}
+      `,
+      subtitleClass: css`
+        ${this.styles.subtitle}
+      `,
       helpButton: {
         title: "Forgot Password?",
         onClick: () => this.setCurrentForm("forgot_password")
@@ -67,8 +85,4 @@ export default {
 };
 </script>
 
-<style>
-.feather-authentication-form {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-}
-</style>
+<style></style>

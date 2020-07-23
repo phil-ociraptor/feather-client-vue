@@ -1,7 +1,9 @@
 <template>
-  <div class="feather-authentication-form">
-    Verify Email
+  <div>
+    <p :class="titleClass">Verify Email</p>
+
     <verification-code-input
+      :styles="styles"
       name="verificationCodeInput"
       placeholder=""
       title="Verification Code"
@@ -9,7 +11,7 @@
       v-model="verificationCode"
     />
     <div v-if="!!errorMessage">{{ errorMessage }}</div>
-    <button :disabled="isBusy" @click="onSubmit">
+    <button :disabled="isBusy" @click="onSubmit" :class="primaryCtaButtonClass">
       <div class="spinner" v-if="isBusy">Loading</div>
       Continue
     </button>
@@ -18,6 +20,7 @@
 
 <script>
 import VerificationCodeInput from "../VerificationCodeInput/VerificationCodeInput.vue";
+import { css } from "emotion";
 
 export default {
   name: "EmailPasswordAuthenticationFormForgotPassword",
@@ -27,10 +30,23 @@ export default {
   props: {
     isBusy: Boolean,
     setCurrentForm: Function,
-    setIsBusy: Function
+    setIsBusy: Function,
+    styles: Object
   },
   data() {
     return {
+      primaryCtaButtonClass: css`
+        ${this.styles.primaryCtaButton}
+      `,
+      secondaryCtaButtonClass: css`
+        ${this.styles.secondaryCtaButton}
+      `,
+      titleClass: css`
+        ${this.styles.title}
+      `,
+      subtitleClass: css`
+        ${this.styles.subtitle}
+      `,
       helpButton: {
         title: "Forgot Password?",
         onClick: () => this.setCurrentForm("forgot_password")
@@ -65,8 +81,4 @@ export default {
 };
 </script>
 
-<style>
-.feather-authentication-form {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-}
-</style>
+<style></style>
